@@ -6,9 +6,9 @@
     <mat-checkbox [checked]="enabled" (change)="toggleMOTD($event)">MOTD is enabled</mat-checkbox>
     <div *ngIf="enabled">
       <mat-tab-group mat-stretch-tabs>
-        <mat-tab [label]="configs[2].title"><app-editor-guts [EditorConfig]="configs[2]"></app-editor-guts></mat-tab>
-        <mat-tab [label]="configs[1].title"><app-editor-guts [EditorConfig]="configs[1]"></app-editor-guts></mat-tab>
-        <mat-tab [label]="configs[0].title"><app-editor-guts [EditorConfig]="configs[0]"></app-editor-guts></mat-tab>
+        <mat-tab [label]="getTabTitle(2)"><app-editor-guts [EditorConfig]="configs[2]"></app-editor-guts></mat-tab>
+        <mat-tab [label]="getTabTitle(1)"><app-editor-guts [EditorConfig]="configs[1]"></app-editor-guts></mat-tab>
+        <mat-tab [label]="getTabTitle(0)"><app-editor-guts [EditorConfig]="configs[0]"></app-editor-guts></mat-tab>
       </mat-tab-group>
     </div>
   </mat-card-content>

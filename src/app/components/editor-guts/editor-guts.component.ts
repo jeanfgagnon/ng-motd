@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { EditorConfig } from 'src/app/common/editor-config';
 
@@ -17,9 +18,21 @@ export class EditorGutsComponent implements OnInit {
 
   message = 'Your text here';
 
-  constructor() { }
+  settingsFormGroup = this.fb.group({
+    title: ['', Validators.required]
+  });
+
+  constructor(private fb: FormBuilder) { }
+
+  @Output() configChanged: EventEmitter<EditorConfig> = new EventEmitter<EditorConfig>();
 
   ngOnInit(): void {
+
+    this.settingsFormGroup.valueChanges.subscribe(form => {
+      console.log('it changed: ', form);
+      this.EditorConfig.isDirty = true;
+      this.configChanged.emit(this.EditorConfig);
+    });
   }
 
   // helpers
@@ -27,7 +40,7 @@ export class EditorGutsComponent implements OnInit {
   public getMessageCSS(): unknown {
     const css: CssObject = {};
 
-    css["height"] = '90px';
+    css["height"] = '50px';
     css["background-color"] = 'red';
 
     return css;

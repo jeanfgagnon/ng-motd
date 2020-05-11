@@ -36,4 +36,15 @@ export class MainFrameComponent implements OnInit {
   public toggleMOTD(event: MatCheckboxChange): void {
     this.enabled = event.checked;
   }
+
+  // helpers functions
+
+  public getTabTitle(no: number): string {
+    let t = this.configs[no].title;
+    if (this.configs[no].isDirty) {
+      t += '*';
+    }
+
+    return t;
+  }
 }
