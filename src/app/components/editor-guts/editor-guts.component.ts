@@ -18,8 +18,8 @@ export class EditorGutsComponent implements OnInit {
 
   message = 'Your text here';
 
-  settingsFormGroup = this.fb.group({
-    title: ['', Validators.required]
+  fgSettings = this.fb.group({
+    background: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder) { }
@@ -28,11 +28,16 @@ export class EditorGutsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.settingsFormGroup.valueChanges.subscribe(form => {
+    this.fgSettings.valueChanges.subscribe(form => {
       console.log('it changed: ', form);
       this.EditorConfig.isDirty = true;
+      this.EditorConfig.background = form.background;
       this.configChanged.emit(this.EditorConfig);
     });
+
+    this.fgSettings.setValue({
+      background: this.EditorConfig.background
+    }, { emitEvent: false });
   }
 
   // helpers
@@ -41,7 +46,7 @@ export class EditorGutsComponent implements OnInit {
     const css: CssObject = {};
 
     css["height"] = '50px';
-    css["background-color"] = 'red';
+    css["background-color"] = this.EditorConfig.background;
 
     return css;
   }

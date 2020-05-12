@@ -22,8 +22,10 @@ export class MainFrameComponent implements OnInit {
   ngOnInit(): void {
     // call server later
     this.configs = [];
-    for(let i = 0; i < 3; i++) {
-      this.configs.push(new EditorConfig());
+    for (let i = 0; i < 3; i++) {
+      let cnf = new EditorConfig();
+      cnf.background = "beige";
+      this.configs.push(cnf);
     }
 
     this.configs[this.INTERNALS].title = "Internals";

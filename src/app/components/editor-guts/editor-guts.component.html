@@ -1,5 +1,5 @@
 <div id="editor-outer" class='editor-outer'>
-  Message appearance<br />
+  <mat-checkbox [checked]="EditorConfig.enabled">Enabled</mat-checkbox><br />
   <div class='message-container'>
     <div [ngStyle]="getMessageCSS()">
       {{ message }}
@@ -8,11 +8,11 @@
 
   <div class='form-zone'>
 
-    <form [formGroup]="settingsFormGroup">
+    <form [formGroup]="fgSettings">
 
       <mat-form-field class='cpc'>
-        <mat-label>Title</mat-label>
-        <input matInput type="text" placeholder="Enter title" aria-label="MOTD Title" formControlName="title" />
+        <mat-label>Background Color</mat-label>
+        <input matInput type="text" placeholder="Background color" aria-label="Background color" formControlName="background" />
       </mat-form-field>
 
     </form>
