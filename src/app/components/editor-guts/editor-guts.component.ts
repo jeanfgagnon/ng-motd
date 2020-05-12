@@ -16,10 +16,25 @@ export class EditorGutsComponent implements OnInit {
 
   private _editorConfig = new EditorConfig();
 
-  message = 'Your text here';
+  initMessage = 'Your text here';
 
   fgSettings = this.fb.group({
-    background: ['', Validators.required]
+    background: ['', Validators.required],
+    color: ['', Validators.required],
+    verticalAlign: [false],
+    horizontalAlign: [false],
+    padding: [0],
+    font: [''],
+    fontSize: [0],
+    bold: [false],
+    italic: [false],
+    underline: [false],
+    height: [0],
+    borderWidth: [0],
+    borderColor: [''],
+    borderStyle: [''],
+    rounded: [false],
+    shadow: [false]
   });
 
   constructor(private fb: FormBuilder) { }
@@ -29,15 +44,11 @@ export class EditorGutsComponent implements OnInit {
   ngOnInit(): void {
 
     this.fgSettings.valueChanges.subscribe(form => {
-      console.log('it changed: ', form);
-      this.EditorConfig.isDirty = true;
-      this.EditorConfig.background = form.background;
+      this.updateConfig(form);
       this.configChanged.emit(this.EditorConfig);
     });
 
-    this.fgSettings.setValue({
-      background: this.EditorConfig.background
-    }, { emitEvent: false });
+    this.loadForm();
   }
 
   // helpers
@@ -48,7 +59,78 @@ export class EditorGutsComponent implements OnInit {
     css["height"] = '50px';
     css["background-color"] = this.EditorConfig.background;
 
+    if (this.EditorConfig.verticalAlign && this.EditorConfig.horizontalAlign) {
+      css["display"] = 'flex';
+      css["align-items"] = 'center';
+      css["justify-content"] = 'center';
+    }
+    else if (this.EditorConfig.verticalAlign) {
+      css["display"] = 'flex';
+      css["align-items"] = 'center';
+      css["justify-content"] = 'start';
+    }
+    else if (this.EditorConfig.horizontalAlign) {
+      css["text-align"] = 'center';
+    }
+
+    css["padding"] = `${this.EditorConfig.padding}px`;
+    css["color"] = this.EditorConfig.color;
+    css["font-family"] = this.EditorConfig.font;
+    css["font-size"] = `${this.EditorConfig.fontSize}px`;
+
+    if (this.EditorConfig.bold) {
+      css["font-weight"] = 'bold';
+    }
+
+    if (this.EditorConfig.rounded) {
+      css["border-radius"] = '6px';
+    }
+
     return css;
+  }
+
+  // privates
+
+  updateConfig(form: any) {
+
+    this.EditorConfig.isDirty = true;
+    this.EditorConfig.background = form.background;
+    this.EditorConfig.color = form.color;
+    this.EditorConfig.verticalAlign = form.verticalAlign;
+    this.EditorConfig.horizontalAlign = form.horizontalAlign;
+    this.EditorConfig.padding = form.padding;
+    this.EditorConfig.font = form.font;
+    this.EditorConfig.fontSize = form.fontSize;
+    this.EditorConfig.bold = form.bold;
+    this.EditorConfig.italic = form.italic;
+    this.EditorConfig.underline = form.underline;
+    this.EditorConfig.height = form.height;
+    this.EditorConfig.rounded = form.rounded;
+    this.EditorConfig.shadow = form.shadow;
+
+  }
+
+  private loadForm(): void {
+
+    this.fgSettings.setValue({
+      background: this.EditorConfig.background,
+      color: this.EditorConfig.color,
+      verticalAlign: this.EditorConfig.verticalAlign,
+      horizontalAlign: this.EditorConfig.horizontalAlign,
+      padding: this.EditorConfig.padding,
+      font: this.EditorConfig.font,
+      fontSize: this.EditorConfig.fontSize,
+      bold: this.EditorConfig.bold,
+      italic: this.EditorConfig.italic,
+      underline: this.EditorConfig.underline,
+      height: this.EditorConfig.height,
+      borderWidth: this.EditorConfig.borderWidth,
+      borderColor: this.EditorConfig.borderColor,
+      borderStyle: this.EditorConfig.borderStyle,
+      rounded: this.EditorConfig.rounded,
+      shadow: this.EditorConfig.shadow
+    }, { emitEvent: false });
+
   }
 
   @Input() set EditorConfig(config: EditorConfig) {

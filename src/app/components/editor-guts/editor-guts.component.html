@@ -1,20 +1,79 @@
 <div id="editor-outer" class='editor-outer'>
-  <mat-checkbox [checked]="EditorConfig.enabled">Enabled</mat-checkbox><br />
-  <div class='message-container'>
-    <div [ngStyle]="getMessageCSS()">
-      {{ message }}
+
+  <form [formGroup]="fgSettings">
+
+    <mat-checkbox [checked]="EditorConfig.enabled">Enabled</mat-checkbox><br />
+
+    <mat-divider></mat-divider>
+
+    <div class='message-container'>
+
+      <div #message class='message-view' [ngStyle]="getMessageCSS()" contenteditable="true">
+        {{ EditorConfig.text }}
+      </div>
+
     </div>
-  </div>
 
-  <div class='form-zone'>
+    <mat-divider></mat-divider>
 
-    <form [formGroup]="fgSettings">
+    <div class='field-zone'>
 
-      <mat-form-field class='cpc'>
+      <mat-form-field>
         <mat-label>Background Color</mat-label>
         <input matInput type="text" placeholder="Background color" aria-label="Background color" formControlName="background" />
       </mat-form-field>
 
-    </form>
-  </div>
+      <mat-form-field>
+        <mat-label>Padding</mat-label>
+        <input matInput type="number" placeholder="Padding" aria-label="Padding" formControlName="padding" />
+      </mat-form-field>
+
+      <mat-checkbox class='field-item' formControlName="verticalAlign">Vertical center</mat-checkbox>
+      <mat-checkbox class='field-item' formControlName="horizontalAlign">Horizontal center</mat-checkbox>
+
+    </div>
+
+    <div class='field-zone'>
+
+      <mat-form-field>
+        <mat-label>Text Color</mat-label>
+        <input matInput type="text" placeholder="Text color" aria-label="Text color" formControlName="color" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Font Family</mat-label>
+        <input matInput type="text" placeholder="Font Family" aria-label="Font family" formControlName="font" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Font Size</mat-label>
+        <input matInput type="number" placeholder="Font Size" aria-label="Font size" formControlName="fontSize" />
+      </mat-form-field>
+
+      <mat-checkbox class='field-item' formControlName="bold">Bold</mat-checkbox>
+
+    </div>
+
+    <div class='field-zone'>
+
+      <mat-form-field>
+        <mat-label>Border Width</mat-label>
+        <input matInput type="number" placeholder="Border Width" aria-label="Border Width" formControlName="borderWidth" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Border Color</mat-label>
+        <input matInput type="text" placeholder="Border Color" aria-label="Border Color" formControlName="borderColor" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Border Style</mat-label>
+        <input matInput type="text" placeholder="Border Style" aria-label="Border Style" formControlName="borderStyle" />
+      </mat-form-field>
+
+      <mat-checkbox class='field-item' formControlName="rounded">Rounded</mat-checkbox>
+
+    </div>
+
+  </form>
 </div>

@@ -5,8 +5,27 @@
 }
 
 .message-container {
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   box-sizing: border-box;
-  border: solid 1px #c0c0c0;
-  border-radius: 5px;
+  // border: solid 1px #c0c0c0;
+  // border-radius: 5px;
+}
+
+.field-zone {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.field-item {
+  align-self: center;
+}
+
+.text-field {
+  width: 100px;
+}
+
+.message-view {
+  box-sizing: border-box;
 }

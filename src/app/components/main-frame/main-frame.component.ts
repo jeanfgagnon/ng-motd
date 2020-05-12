@@ -14,7 +14,7 @@ export class MainFrameComponent implements OnInit {
   private CUSTOMERS = 1;
   private VISITORS = 2;
 
-  enabled = false;
+  enabled = true;
 
   configs: EditorConfig[];
   constructor() { }
@@ -24,7 +24,25 @@ export class MainFrameComponent implements OnInit {
     this.configs = [];
     for (let i = 0; i < 3; i++) {
       let cnf = new EditorConfig();
+
+      cnf.text = 'Type your message here';
       cnf.background = "beige";
+      cnf.color = "black";
+      cnf.verticalAlign = false;
+      cnf.horizontalAlign = false;
+      cnf.padding = 0;
+      cnf.font = 'Verdana';
+      cnf.fontSize = 12;
+      cnf.bold = false;
+      cnf.italic = false;
+      cnf.underline = false;
+      cnf.height = 50;
+      cnf.borderWidth = 0;
+      cnf.borderStyle = '';
+      cnf.borderColor = '';
+      cnf.rounded = false;
+      cnf.shadow = false;
+
       this.configs.push(cnf);
     }
 
