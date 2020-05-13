@@ -96,6 +96,8 @@ export class EditorGutsComponent implements OnInit {
       css["box-shadow"] = '1px 1px 3px 0px rgba(92, 92, 92, 1)';
     }
 
+    css["height"] = `${this.EditorConfig.height}px`;
+
     return css;
   }
 

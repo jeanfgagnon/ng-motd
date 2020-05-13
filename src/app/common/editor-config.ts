@@ -1,7 +1,8 @@
 export class EditorConfig {
+  public id: number;
+  public enabled: boolean;
   public title: string;
   public text: string;
-  public enabled: boolean;
   public isDirty = false;
   public background: string;
   public color: string;

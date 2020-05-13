@@ -1,8 +1,8 @@
-<mat-card id='main-card'>
-  <mat-card-title>MOTD</mat-card-title>
-  <mat-card-subtitle>Message of the day editor</mat-card-subtitle>
+<div id='main-card' class='mat-elevation-z2'>
+  <h1>MOTD</h1>
+  <h3>Message of the day editor</h3>
 
-  <mat-card-content>
+  <div>
     <mat-checkbox [checked]="enabled" (change)="toggleMOTD($event)">MOTD is enabled</mat-checkbox>
     <div *ngIf="enabled">
       <mat-tab-group mat-stretch-tabs>
@@ -11,6 +11,6 @@
         <mat-tab [label]="getTabTitle(0)"><app-editor-guts [EditorConfig]="configs[0]"></app-editor-guts></mat-tab>
       </mat-tab-group>
     </div>
-  </mat-card-content>
+  </div>
 
-</mat-card>
+</div>

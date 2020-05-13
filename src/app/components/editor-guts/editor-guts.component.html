@@ -28,12 +28,14 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label>Height</mat-label>
+        <input matInput type="number" placeholder="Height" aria-label="Height" formControlName="height" />
+      </mat-form-field>
+
+      <mat-form-field>
         <mat-label>Padding</mat-label>
         <input matInput type="number" placeholder="Padding" aria-label="Padding" formControlName="padding" />
       </mat-form-field>
-
-      <mat-checkbox class='field-item' formControlName="verticalAlign">Vertical center</mat-checkbox>
-      <mat-checkbox class='field-item' formControlName="horizontalAlign">Horizontal center</mat-checkbox>
 
     </div>
 
@@ -53,8 +55,6 @@
         <mat-label>Font Size</mat-label>
         <input matInput type="number" placeholder="Font Size" aria-label="Font size" formControlName="fontSize" />
       </mat-form-field>
-
-      <mat-checkbox class='field-item' formControlName="bold">Bold</mat-checkbox>
 
     </div>
 
@@ -78,11 +78,14 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-checkbox class='field-item' formControlName="rounded">Rounded</mat-checkbox>
 
     </div>
     <div class='field-zone'>
+      <mat-checkbox class='field-item' formControlName="bold">Bold</mat-checkbox>
+      <mat-checkbox class='field-item' formControlName="verticalAlign">Vertical center</mat-checkbox>
+      <mat-checkbox class='field-item' formControlName="horizontalAlign">Horizontal center</mat-checkbox>
       <mat-checkbox class='field-item' formControlName="shadow">Shadow</mat-checkbox>
+      <mat-checkbox class='field-item' formControlName="rounded">Rounded</mat-checkbox>
     </div>
   </form>
 </div>
