@@ -1,6 +1,7 @@
 .editor-outer {
   // padding: 25px;
   margin-top: 15px;
+  height: 425px;
   box-sizing: border-box;
 }
 
@@ -28,4 +29,7 @@
 
 .message-view {
   box-sizing: border-box;
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
 }

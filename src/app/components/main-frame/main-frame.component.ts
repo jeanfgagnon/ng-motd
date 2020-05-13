@@ -27,6 +27,7 @@ export class MainFrameComponent implements OnInit {
 
       cnf.text = 'Type your message here';
       cnf.background = "beige";
+      cnf.enabled = false;
       cnf.color = "black";
       cnf.verticalAlign = false;
       cnf.horizontalAlign = false;
@@ -38,7 +39,7 @@ export class MainFrameComponent implements OnInit {
       cnf.underline = false;
       cnf.height = 50;
       cnf.borderWidth = 0;
-      cnf.borderStyle = '';
+      cnf.borderStyle = 'none';
       cnf.borderColor = '';
       cnf.rounded = false;
       cnf.shadow = false;

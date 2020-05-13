@@ -15,10 +15,11 @@ interface CssObject {
 export class EditorGutsComponent implements OnInit {
 
   private _editorConfig = new EditorConfig();
-
+  public borderStyles: string[] = [];
   initMessage = 'Your text here';
 
   fgSettings = this.fb.group({
+    enabled: [false],
     background: ['', Validators.required],
     color: ['', Validators.required],
     verticalAlign: [false],
@@ -48,6 +49,7 @@ export class EditorGutsComponent implements OnInit {
       this.configChanged.emit(this.EditorConfig);
     });
 
+    this.loadBorderStyles();
     this.loadForm();
   }
 
@@ -86,13 +88,30 @@ export class EditorGutsComponent implements OnInit {
       css["border-radius"] = '6px';
     }
 
+    css["border-style"] = this.EditorConfig.borderStyle;
+    css["border-width"] = `${this.EditorConfig.borderWidth}px`;
+    css["border-color"] = this.EditorConfig.borderColor;
+
+    if (this.EditorConfig.shadow) {
+      css["box-shadow"] = '1px 1px 3px 0px rgba(92, 92, 92, 1)';
+    }
+
     return css;
   }
 
   // privates
 
-  updateConfig(form: any) {
+  private loadBorderStyles(): void {
+    this.borderStyles.push("none");
+    this.borderStyles.push("solid");
+    this.borderStyles.push("double");
+    this.borderStyles.push("dashed");
+    this.borderStyles.push("dotted");
+  }
 
+  private updateConfig(form: any) {
+
+    this.EditorConfig.enabled = form.enabled;
     this.EditorConfig.isDirty = true;
     this.EditorConfig.background = form.background;
     this.EditorConfig.color = form.color;
@@ -105,6 +124,9 @@ export class EditorGutsComponent implements OnInit {
     this.EditorConfig.italic = form.italic;
     this.EditorConfig.underline = form.underline;
     this.EditorConfig.height = form.height;
+    this.EditorConfig.borderWidth = form.borderWidth;
+    this.EditorConfig.borderStyle = form.borderStyle;
+    this.EditorConfig.borderColor = form.borderColor;
     this.EditorConfig.rounded = form.rounded;
     this.EditorConfig.shadow = form.shadow;
 
@@ -113,6 +135,7 @@ export class EditorGutsComponent implements OnInit {
   private loadForm(): void {
 
     this.fgSettings.setValue({
+      enabled: this.EditorConfig.enabled,
       background: this.EditorConfig.background,
       color: this.EditorConfig.color,
       verticalAlign: this.EditorConfig.verticalAlign,

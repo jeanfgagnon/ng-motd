@@ -2,7 +2,11 @@
 
   <form [formGroup]="fgSettings">
 
-    <mat-checkbox [checked]="EditorConfig.enabled">Enabled</mat-checkbox><br />
+    <div>
+      <mat-checkbox [checked]="EditorConfig.enabled" formControlName="enabled">Enabled</mat-checkbox>
+      <br />
+      <br />
+    </div>
 
     <mat-divider></mat-divider>
 
@@ -67,13 +71,18 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Border Style</mat-label>
-        <input matInput type="text" placeholder="Border Style" aria-label="Border Style" formControlName="borderStyle" />
+        <mat-select placeholder="Border Style" formControlName="borderStyle">
+          <mat-option *ngFor="let bs of borderStyles" [value]="bs">
+            {{ bs }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
       <mat-checkbox class='field-item' formControlName="rounded">Rounded</mat-checkbox>
 
     </div>
-
+    <div class='field-zone'>
+      <mat-checkbox class='field-item' formControlName="shadow">Shadow</mat-checkbox>
+    </div>
   </form>
 </div>
