@@ -15,6 +15,7 @@ export class MainFrameComponent implements OnInit {
   private VISITORS = 2;
 
   enabled = true;
+  changed = false;
 
   configs: EditorConfig[];
   constructor() { }
@@ -32,7 +33,7 @@ export class MainFrameComponent implements OnInit {
       cnf.verticalAlign = false;
       cnf.horizontalAlign = false;
       cnf.padding = 0;
-      cnf.font = 'Verdana';
+      cnf.font = 'Helvetica';
       cnf.fontSize = 12;
       cnf.bold = false;
       cnf.italic = false;
@@ -56,6 +57,11 @@ export class MainFrameComponent implements OnInit {
 
   public toggleMOTD(event: MatCheckboxChange): void {
     this.enabled = event.checked;
+    this.changed = true;
+  }
+
+  public configChanged(no: number): void {
+    this.changed = true;
   }
 
   // helpers functions

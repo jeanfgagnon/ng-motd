@@ -2,19 +2,14 @@
 
   <form [formGroup]="fgSettings">
 
-    <div>
-      <mat-checkbox [checked]="EditorConfig.enabled" formControlName="enabled">Enabled</mat-checkbox>
-      <br />
-      <br />
-    </div>
-
-    <mat-divider></mat-divider>
-
     <div class='message-container'>
 
-      <div #message class='message-view' [ngStyle]="getMessageCSS()" contenteditable="true">
-        {{ EditorConfig.text }}
-      </div>
+      <div #message
+          [textContent]="EditorConfig.text"
+          [ngStyle]="getMessageCSS()"
+          (input)="messageChanged($event)"
+          class='message-view'
+          contenteditable="true"></div>
 
     </div>
 
@@ -81,6 +76,7 @@
 
     </div>
     <div class='field-zone'>
+      <mat-checkbox class='field-item' formControlName="enabled">Enabled</mat-checkbox>
       <mat-checkbox class='field-item' formControlName="bold">Bold</mat-checkbox>
       <mat-checkbox class='field-item' formControlName="verticalAlign">Vertical center</mat-checkbox>
       <mat-checkbox class='field-item' formControlName="horizontalAlign">Horizontal center</mat-checkbox>

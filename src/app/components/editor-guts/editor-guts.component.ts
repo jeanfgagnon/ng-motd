@@ -53,6 +53,14 @@ export class EditorGutsComponent implements OnInit {
     this.loadForm();
   }
 
+  // event handlers
+
+  public messageChanged(event: InputEvent): void {
+    this.EditorConfig.text = event.target["textContent"];
+    this.EditorConfig.isDirty = true;
+    this.configChanged.emit(this.EditorConfig);
+  }
+
   // helpers
 
   public getMessageCSS(): unknown {
