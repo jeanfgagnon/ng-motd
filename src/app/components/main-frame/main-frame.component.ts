@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox/checkbox';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 import { EditorConfig } from 'src/app/common/editor-config';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-frame',
@@ -18,7 +23,9 @@ export class MainFrameComponent implements OnInit {
   changed = false;
 
   configs: EditorConfig[];
-  constructor() { }
+
+  constructor(private http: HttpClient,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     // call server later
@@ -64,6 +71,20 @@ export class MainFrameComponent implements OnInit {
     this.changed = true;
   }
 
+  public saveClicked(e: Event): void {
+    this.saveData().subscribe((result) => {
+      if (result === 'ok') {
+        this.showSnackBar('Save successfully');
+      }
+      else {
+        this.showSnackBar(`Error occured: ${result}`);
+      }
+    },
+    (err) => {
+      this.showSnackBar(`Request failed ${err.status}`);
+    });
+  }
+
   // helpers functions
 
   public getTabTitle(no: number): string {
@@ -74,4 +95,28 @@ export class MainFrameComponent implements OnInit {
 
     return t;
   }
+
+  // private code
+
+  private saveData(): Observable<string> {
+
+    console.log(JSON.stringify(this.configs, null, 2));
+
+    let myHeaders: HttpHeaders = new HttpHeaders();
+    const myBody: any = {
+      configs: this.configs
+    };
+    myHeaders.set('Content-Type', 'application/json');
+
+    return this.http
+      .post<string>(`${environment.apiUrl}savemotd`, myBody, { headers: myHeaders })
+      .pipe(map((result: string) => result));
+  }
+
+  private showSnackBar(message: string, action?: string) {
+    let config = new MatSnackBarConfig();
+    config.duration = 4000;
+    this.snackBar.open(message, action, config);
+  }
+
 }
