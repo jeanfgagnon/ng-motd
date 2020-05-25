@@ -13,7 +13,7 @@
 
   </div>
 
-  <div>
+  <div *ngIf='configs.length > 0'>
     <mat-checkbox [checked]="enabled" (change)="toggleMOTD($event)">MOTD is enabled</mat-checkbox>
     <div *ngIf="enabled">
       <mat-tab-group mat-stretch-tabs>
